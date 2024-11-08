@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHATEVER</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            text-align: center;
+            color: white;
+            width: 100%;
+            margin: 0;
+            background-color: rgb(40, 40, 40);
+            overflow: auto;
+        }
+
+        h1 {
+            font-size: 20px;
+            color: white;
+            margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: white;
+            margin-top: 0px;
+        }
+
+        #games,
+        #books,
+        #serials,
+        #movies,
+        #back,
+        #show_random_game,
+        #result_show_game {
+            margin: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 10px 20px;
+            font-size: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #games,
+        #books,
+        #serials,
+        #movies {
+            background-color: #5DC8CD;
+            color: white;
+        }
+
+        #back {
+            background-color: #ccc;
+            margin-top: 20px;
+            display: none;
+        }
+
+        #chooseGenre,
+        #selectGenre,
+        #show_random_game,
+        #result_show_game {
+            margin-top: 10px;
+            display: none;
+        }
+
+        #show_random_game {
+            background-color: #5DC8CD;
+            color: white;
+            margin-top: 20px;
+        }
+
+        #result_show_game {
+            margin-top: 20px;
+            display: none;
+            color: white;
+        }
+
+        #games_menu,
+        #books_menu,
+        #serials_menu,
+        #movies_menu,
+        #selectGenre_games,
+        #selectGenre_books,
+        #selectGenre_serials,
+        #selectGenre_movies {
+            font-size: 15;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        
+        #show_random_game_games,
+        #show_random_game_books,
+        #show_random_game_serials,
+        #show_random_game_movies {
+            background-color: #5DC8CD;
+            color: white;
+            font-size: 20px;
+            margin: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 10px 20px;
+            font-size: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #selectGenre_c {
+            color: white;
+            font-size: 30;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #result_show_game_games,
+        #result_show_game_books,
+        #result_show_game_serials,
+        #result_show_game_movies {
+            color: #5DC8CD;
+            font-size: 30;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>WHATEVER</h1>
+    <h1>Выберите категорию:</h1>
+
+    <button id="games" onclick="showGames()">Игры</button>
+    <button id="books" onclick="showBooks()">Книги</button>
+    <button id="serials" onclick="showSerials()">Сериалы</button>
+    <button id="movies" onclick="showMovies()">Фильмы</button>
+
+    <div id="games_menu" style="display: none;">
+        <h2>Игры</h2>
+        <label id="selectGenre_c" for="selectGenre_games">Выберите жанр:</label>
+        <select id="selectGenre_games">
+            <option value="MMORPG">MMORPG</option>
+            <option value="Shooter">Шутер</option>
+            <option value="MOBA">MOBA</option>
+            <option value="Battle Royale">Battle Royale</option>
+            <option value="Strategy">Стратегия</option>
+            <option value="Fantasy">Фэнтези</option>
+            <option value="Sci-Fi">Научная фантастика</option>
+            <option value="Card Games">Карточные игры</option>
+            <option value="Racing">Гонки</option>
+            <option value="Fighting">Боевые игры</option>
+            <option value="Social">Социальные игры</option>
+            <option value="Sports">Спортивные игры</option>
+            <option value="Adventure">Приключения</option>
+            <option value="RPG">RPG</option>
+            <option value="Action">Экшен</option>
+        </select>
+        <button id="show_random_game_games" onclick="showRandomItem('games')">Показать случайный элемент</button>
+        <div id="result_show_game_games"></div>
+    </div>
+
+    <div id="books_menu" style="display: none;">
+        <h2>Книги</h2>
+        <label id="selectGenre_c" for="selectGenre_books">Выберите жанр:</label>
+        <select id="selectGenre_books">
+            <option value="Fantasy">Фэнтези</option>
+            <option value="Sci-Fi">Научная фантастика</option>
+            <option value="Dystopian">Антиутопия</option>
+            <option value="Classic">Классика</option>
+            <option value="Historical">Исторический</option>
+            <option value="Biography">Биография</option>
+            <option value="Crime">Криминал</option>
+            <option value="Superhero">Супергеройский</option>
+            <option value="Romance">Романтика</option>
+            <option value="Mystery">Детектив</option>
+            <option value="Horror">Ужасы</option>
+            <option value="Thriller">Триллеры</option>
+            <option value="Adventure">Приключения</option>
+            <option value="Young Adult">Молодежная литература</option>
+        </select>
+        <button id="show_random_game_books" onclick="showRandomItem('books')">Показать случайный элемент</button>
+        <div id="result_show_game_books"></div>
+    </div>
+
+    <div id="serials_menu" style="display: none;">
+        <h2>Сериалы</h2>
+        <label id="selectGenre_c" for="selectGenre_serials">Выберите жанр:</label>
+        <select id="selectGenre_serials">
+            <option value="Fantasy">Фэнтези</option>
+            <option value="Sci-Fi">Научная фантастика</option>
+            <option value="Dystopian">Антиутопия</option>
+            <option value="Crime">Криминал</option>
+            <option value="Thriller">Триллеры</option>
+            <option value="Comedy">Комедия</option>
+            <option value="Drama">Драма</option>
+            <option value="Romance">Романтика</option>
+            <option value="Historical">Исторический</option>
+            <option value="Horror">Ужасы</option>
+            <option value="Superhero">Супергеройский</option>
+            <option value="Adventure">Приключения</option>
+            <option value="Animation">Анимация</option>
+        </select>
+        <button id="show_random_game_serials" onclick="showRandomItem('serials')">Показать случайный элемент</button>
+        <div id="result_show_game_serials"></div>
+    </div>
+
+    <div id="movies_menu" style="display: none;">
+        <h2>Фильмы</h2>
+        <label id="selectGenre_c" for="selectGenre_movies">Выберите жанр:</label>
+        <select id="selectGenre_movies">
+            <option value="Fantasy">Фэнтези</option>
+            <option value="Sci-Fi">Научная фантастика</option>
+            <option value="Superhero">Супергеройский</option>
+            <option value="Thriller">Триллеры</option>
+            <option value="Comedy">Комедия</option>
+            <option value="Drama">Драма</option>
+            <option value="Romance">Романтика</option>
+            <option value="Horror">Ужасы</option>
+            <option value="Action">Экшен</option>
+            <option value="Adventure">Приключения</option>
+            <option value="Animation">Анимация</option>
+        </select>
+        <button id="show_random_game_movies" onclick="showRandomItem('movies')">Показать случайный элемент</button>
+        <div id="result_show_game_movies"></div>
+    </div>
+
+    <button id="back" onclick="showObjects()">Назад</button>
+
+    <script>
+        let hiddenObjects = [];
+        let hideThen = [];
+        const backButton = document.getElementById("back");
+        const oldObjects = document.querySelectorAll("h1, #games, #books, #serials, #movies");
+
+        const games = [
+            // MMORPG
+            { title: "World of Warcraft", genre: "MMORPG" },
+            { title: "Final Fantasy XIV: A Realm Reborn", genre: "MMORPG" },
+            { title: "Black Desert Online", genre: "MMORPG" },
+            { title: "Guild Wars 2", genre: "MMORPG" },
+            { title: "The Elder Scrolls Online", genre: "MMORPG" },
+            // Shooter
+            { title: "Call of Duty: Modern Warfare II", genre: "Shooter" },
+            { title: "Halo Infinite", genre: "Shooter" },
+            { title: "Destiny 2", genre: "Shooter" },
+            { title: "Apex Legends", genre: "Shooter" },
+            { title: "Overwatch 2", genre: "Shooter" },
+            // MOBA
+            { title: "League of Legends", genre: "MOBA" },
+            { title: "Dota 2", genre: "MOBA" },
+            { title: "Heroes of the Storm", genre: "MOBA" },
+            { title: "Smite", genre: "MOBA" },
+            { title: "Mobile Legends: Bang Bang", genre: "MOBA" },
+            // Battle Royale
+            { title: "Fortnite", genre: "Battle Royale" },
+            { title: "PUBG: Battlegrounds", genre: "Battle Royale" },
+            { title: "Call of Duty: Warzone", genre: "Battle Royale" },
+            { title: "Apex Legends", genre: "Battle Royale" },
+            { title: "Ring of Elysium", genre: "Battle Royale" },
+            // Strategy
+            { title: "StarCraft II", genre: "Strategy" },
+            { title: "Civilization VI", genre: "Strategy" },
+            { title: "Age of Empires IV", genre: "Strategy" },
+            { title: "Total War: Warhammer III", genre: "Strategy" },
+            { title: "Company of Heroes 3", genre: "Strategy" },
+            // Fantasy
+            { title: "The Witcher 3: Wild Hunt", genre: "Fantasy" },
+            { title: "Elden Ring", genre: "Fantasy" },
+            { title: "Dragon Age: Inquisition", genre: "Fantasy" },
+            { title: "Skyrim", genre: "Fantasy" },
+            { title: "Kingdom Come: Deliverance", genre: "Fantasy" },
+            // Sci-Fi
+            { title: "Star Citizen", genre: "Sci-Fi" },
+            { title: "No Man's Sky", genre: "Sci-Fi" },
+            { title: "Mass Effect: Legendary Edition", genre: "Sci-Fi" },
+            { title: "Destiny 2", genre: "Sci-Fi" },
+            { title: "Outer Wilds", genre: "Sci-Fi" },
+            // Card Games
+            { title: "Hearthstone", genre: "Card Games" },
+            { title: "Gwent: The Witcher Card Game", genre: "Card Games" },
+            { title: "Magic: The Gathering Arena", genre: "Card Games" },
+            { title: "Legends of Runeterra", genre: "Card Games" },
+            { title: "The Elder Scrolls: Legends", genre: "Card Games" },
+            // Racing
+            { title: "Forza Horizon 5", genre: "Racing" },
+            { title: "Gran Turismo 7", genre: "Racing" },
+            { title: "F1 22", genre: "Racing" },
+            { title: "Dirt 5", genre: "Racing" },
+            { title: "Need for Speed Unbound", genre: "Racing" },
+            // Fighting
+            { title: "Mortal Kombat 11", genre: "Fighting" },
+            { title: "Tekken 7", genre: "Fighting" },
+            { title: "Super Smash Bros. Ultimate", genre: "Fighting" },
+            { title: "Street Fighter V", genre: "Fighting" },
+            { title: "Guilty Gear Strive", genre: "Fighting" },
+            // Social
+            { title: "Among Us", genre: "Social" },
+            { title: "Fall Guys", genre: "Social" },
+            { title: "Minecraft", genre: "Social" },
+            { title: "Roblox", genre: "Social" },
+            { title: "Animal Crossing: New Horizons", genre: "Social" },
+            // Sports
+            { title: "FIFA 23", genre: "Sports" },
+            { title: "NBA 2K23", genre: "Sports" },
+            { title: "MLB The Show 23", genre: "Sports" },
+            { title: "Madden NFL 23", genre: "Sports" },
+            { title: "Tony Hawk's Pro Skater 1+2", genre: "Sports" },
+            // Adventure
+            { title: "The Legend of Zelda: Breath of the Wild", genre: "Adventure" },
+            { title: "Red Dead Redemption 2", genre: "Adventure" },
+            { title: "Horizon Zero Dawn", genre: "Adventure" },
+            { title: "Uncharted 4: A Thief's End", genre: "Adventure" },
+            { title: "Ghost of Tsushima", genre: "Adventure" },
+            // RPG
+            { title: "The Witcher 3: Wild Hunt", genre: "RPG" },
+            { title: "Elden Ring", genre: "RPG" },
+            { title: "Dragon Age: Inquisition", genre: "RPG" },
+            { title: "Skyrim", genre: "RPG" },
+            { title: "Kingdom Come: Deliverance", genre: "RPG" },
+            // Action
+            { title: "God of War (2018)", genre: "Action" },
+            { title: "Spider-Man: Miles Morales", genre: "Action" },
+            { title: "Assassin's Creed Valhalla", genre: "Action" },
+            { title: "Ghost of Tsushima", genre: "Action" },
+            { title: "Elden Ring", genre: "Action" },
+        ];
+
+        const books = [
+            // Fantasy
+            { title: "Песнь Льда и Пламени", genre: "Fantasy" },
+            { title: "Колесо Времени", genre: "Fantasy" },
+            { title: "Архив Буревестника", genre: "Fantasy" },
+            { title: "Хроники Убийцы Короля", genre: "Fantasy" },
+            { title: "Сага о Меднорожденных", genre: "Fantasy" },
+            // Sci-Fi
+            { title: "Дюна", genre: "Sci-Fi" },
+            { title: "Марсианин", genre: "Sci-Fi" },
+            { title: "Игра Эндера", genre: "Sci-Fi" },
+            { title: "Основание", genre: "Sci-Fi" },
+            { title: "Автостопом по галактике", genre: "Sci-Fi" },
+            // Dystopian
+            { title: "1984", genre: "Dystopian" },
+            { title: "Рассказ Служанки", genre: "Dystopian" },
+            { title: "Голодные игры", genre: "Dystopian" },
+            { title: "Дивергент", genre: "Dystopian" },
+            { title: "Дорога", genre: "Dystopian" },
+            // Classic
+            { title: "Гордость и предубеждение", genre: "Classic" },
+            { title: "Джейн Эйр", genre: "Classic" },
+            { title: "Грозовой перевал", genre: "Classic" },
+            { title: "Великий Гэтсби", genre: "Classic" },
+            { title: "Убить пересмешника", genre: "Classic" },
+            // Historical
+            { title: "Соловей", genre: "Historical" },
+            { title: "Книжный вор", genre: "Historical" },
+            { title: "Прислуга", genre: "Historical" },
+            { title: "Унесенные ветром", genre: "Historical" },
+            { title: "Столпы Земли", genre: "Historical" },
+            // Biography
+            { title: "Стив Джобс", genre: "Biography" },
+            { title: "Илон Маск", genre: "Biography" },
+            { title: "Становление", genre: "Biography" },
+            { title: "Автобиография Малкольма Икса", genre: "Biography" },
+            { title: "Эйнштейн: Жизнь и Вселенная", genre: "Biography" },
+            // Crime
+            { title: "Девушка с татуировкой дракона", genre: "Crime" },
+            { title: "Исчезнувшая", genre: "Crime" },
+            { title: "Тихая пациентка", genre: "Crime" },
+            { title: "Код да Винчи", genre: "Crime" },
+            { title: "Девушка в поезде", genre: "Crime" },
+            // Superhero
+            { title: "Возвращение Темного Рыцаря", genre: "Superhero" },
+            { title: "Хранители", genre: "Superhero" },
+            { title: "Песочный человек", genre: "Superhero" },
+            { title: "Ходячие мертвецы", genre: "Superhero" },
+            { title: "Проповедник", genre: "Superhero" },
+            // Romance
+            { title: "Дневник памяти", genre: "Romance" },
+            { title: "Гордость и предубеждение", genre: "Romance" },
+            { title: "Виноваты звезды", genre: "Romance" },
+            { title: "До встречи с тобой", genre: "Romance" },
+            { title: "Зови меня своим именем", genre: "Romance" },
+            // Mystery
+            { title: "Исчезнувшая", genre: "Mystery" },
+            { title: "Девушка в поезде", genre: "Mystery" },
+            { title: "Тихая пациентка", genre: "Mystery" },
+            { title: "Код да Винчи", genre: "Mystery" },
+            { title: "Девушка с татуировкой дракона", genre: "Mystery" },
+            // Horror
+            { title: "Сияние", genre: "Horror" },
+            { title: "Психо", genre: "Horror" },
+            { title: "Оно", genre: "Horror" },
+            { title: "Заклятие", genre: "Horror" },
+            { title: "Сияние", genre: "Horror" },
+            // Thriller
+            { title: "Молчание ягнят", genre: "Thriller" },
+            { title: "Шестое чувство", genre: "Thriller" },
+            { title: "Девушка с татуировкой дракона", genre: "Thriller" },
+            { title: "Исчезнувшая", genre: "Thriller" },
+            { title: "Тихая пациентка", genre: "Thriller" },
+            // Adventure
+            { title: "Путешествие к центру Земли", genre: "Adventure" },
+            { title: "20 000 лье под водой", genre: "Adventure" },
+            { title: "Остров сокровищ", genre: "Adventure" },
+            { title: "Робинзон Крузо", genre: "Adventure" },
+            { title: "Дети капитана Гранта", genre: "Adventure" },
+            // Young Adult
+            { title: "Голодные игры", genre: "Young Adult" },
+            { title: "Дивергент", genre: "Young Adult" },
+            { title: "Виноваты звезды", genre: "Young Adult" },
+            { title: "До встречи с тобой", genre: "Young Adult" },
+            { title: "Сумерки", genre: "Young Adult" },
+        ];
+
+        const serials = [
+            // Fantasy
+            { title: "Игра престолов", genre: "Fantasy" },
+            { title: "Ведьмак", genre: "Fantasy" },
+            { title: "Властелин колец: Кольца власти", genre: "Fantasy" },
+            { title: "Тень и кость", genre: "Fantasy" },
+            { title: "Колесо времени", genre: "Fantasy" },
+            // Sci-Fi
+            { title: "Очень странные дела", genre: "Sci-Fi" },
+            { title: "Черное зеркало", genre: "Sci-Fi" },
+            { title: "Темные начала", genre: "Sci-Fi" },
+            { title: "Мир Дикого Запада", genre: "Sci-Fi" },
+            { title: "Пространство", genre: "Sci-Fi" },
+            // Dystopian
+            { title: "Рассказ служанки", genre: "Dystopian" },
+            { title: "Сотня", genre: "Dystopian" },
+            { title: "Снегоуборщик", genre: "Dystopian" },
+            { title: "Человек в высоком замке", genre: "Dystopian" },
+            { title: "О дивный новый мир", genre: "Dystopian" },
+            // Crime
+            { title: "Во все тяжкие", genre: "Crime" },
+            { title: "Острые козырьки", genre: "Crime" },
+            { title: "Лучше звоните Солу", genre: "Crime" },
+            { title: "Нарко", genre: "Crime" },
+            { title: "Озарк", genre: "Crime" },
+            // Thriller
+            { title: "Призраки дома на холме", genre: "Thriller" },
+            { title: "Охотник за разумом", genre: "Thriller" },
+            { title: "Ты", genre: "Thriller" },
+            { title: "Грешница", genre: "Thriller" },
+            { title: "Настоящий детектив", genre: "Thriller" },
+            // Comedy
+            { title: "Офис", genre: "Comedy" },
+            { title: "Парки и зоны отдыха", genre: "Comedy" },
+            { title: "Бруклин 9-9", genre: "Comedy" },
+            { title: "Современная семья", genre: "Comedy" },
+            { title: "Друзья", genre: "Comedy" },
+            // Drama
+            { title: "Корона", genre: "Drama" },
+            { title: "Прослушка", genre: "Drama" },
+            { title: "Карточный домик", genre: "Drama" },
+            { title: "Безумцы", genre: "Drama" },
+            { title: "Наследники", genre: "Drama" },
+            // Romance
+            { title: "Бриджертоны", genre: "Romance" },
+            { title: "Виргин-Ривер", genre: "Romance" },
+            { title: "Хорошее место", genre: "Romance" },
+            { title: "Любовь слепа", genre: "Romance" },
+            { title: "Это мы", genre: "Romance" },
+            // Historical
+            { title: "Корона", genre: "Historical" },
+            { title: "Викинги", genre: "Historical" },
+            { title: "Тюдоры", genre: "Historical" },
+            { title: "Рим", genre: "Historical" },
+            { title: "Подпольная империя", genre: "Historical" },
+            // Horror
+            { title: "Американская история ужасов", genre: "Horror" },
+            { title: "Ходячие мертвецы", genre: "Horror" },
+            { title: "Сверхъестественное", genre: "Horror" },
+            { title: "Тьма", genre: "Horror" },
+            { title: "Бэтмен", genre: "Horror" },
+            // Superhero
+            { title: "Стрела", genre: "Superhero" },
+            { title: "Флэш", genre: "Superhero" },
+            { title: "Супергёрл", genre: "Superhero" },
+            { title: "Люцифер", genre: "Superhero" },
+            { title: "Ходячие мертвецы", genre: "Superhero" },
+            // Adventure
+            { title: "Кости и драконы", genre: "Adventure" },
+            { title: "Охотники за сокровищами", genre: "Adventure" },
+            { title: "Пространство", genre: "Adventure" },
+            { title: "Черная паруса", genre: "Adventure" },
+            { title: "Викинги", genre: "Adventure" },
+            // Animation
+            { title: "Рик и Морти", genre: "Animation" },
+            { title: "Симпсоны", genre: "Animation" },
+            { title: "Гриффины", genre: "Animation" },
+            { title: "Аватар: Легенда об Аанге", genre: "Animation" },
+            { title: "Время приключений", genre: "Animation" },
+        ];
+
+        const movies = [
+            // Fantasy
+            { title: "Властелин колец: Братство Кольца", genre: "Fantasy" },
+            { title: "Гарри Поттер и Философский камень", genre: "Fantasy" },
+            { title: "Хоббит: Нежданное путешествие", genre: "Fantasy" },
+            { title: "Алиса в Стране Чудес", genre: "Fantasy" },
+            { title: "Лабиринт Фавна", genre: "Fantasy" },
+            // Sci-Fi
+            { title: "Звездные войны: Эпизод IV - Новая надежда", genre: "Sci-Fi" },
+            { title: "Бегущий по лезвию 2049", genre: "Sci-Fi" },
+            { title: "Интерстеллар", genre: "Sci-Fi" },
+            { title: "Прибытие", genre: "Sci-Fi" },
+            { title: "Стражи Галактики", genre: "Sci-Fi" },
+            // Superhero
+            { title: "Темный рыцарь", genre: "Superhero" },
+            { title: "Мстители: Финал", genre: "Superhero" },
+            { title: "Человек-паук: Нет пути домой", genre: "Superhero" },
+            { title: "Капитан Америка: Зимний солдат", genre: "Superhero" },
+            { title: "Логан", genre: "Superhero" },
+            // Thriller
+            { title: "Молчание ягнят", genre: "Thriller" },
+            { title: "Шестое чувство", genre: "Thriller" },
+            { title: "Психо", genre: "Thriller" },
+            { title: "Прочь", genre: "Thriller" },
+            { title: "Сияние", genre: "Thriller" },
+            // Comedy
+            { title: "Мальчишник в Вегасе", genre: "Comedy" },
+            { title: "Девичник в Вегасе", genre: "Comedy" },
+            { title: "21 Jump Street", genre: "Comedy" },
+            { title: "Суперперцы", genre: "Comedy" },
+            { title: "Большой Лебовски", genre: "Comedy" },
+            // Drama
+            { title: "Побег из Шоушенка", genre: "Drama" },
+            { title: "Бойцовский клуб", genre: "Drama" },
+            { title: "Зеленая миля", genre: "Drama" },
+            { title: "Крестный отец", genre: "Drama" },
+            { title: "Форрест Гамп", genre: "Drama" },
+            // Romance
+            { title: "Титаник", genre: "Romance" },
+            { title: "Дневник памяти", genre: "Romance" },
+            { title: "Реальная любовь", genre: "Romance" },
+            { title: "Ла-Ла Лэнд", genre: "Romance" },
+            { title: "Виноваты звезды", genre: "Romance" },
+            // Horror
+            { title: "Сияние", genre: "Horror" },
+            { title: "Психо", genre: "Horror" },
+            { title: "Оно", genre: "Horror" },
+            { title: "Заклятие", genre: "Horror" },
+            { title: "Сияние", genre: "Horror" },
+            // Action
+            { title: "Джон Уик", genre: "Action" },
+            { title: "Матрица", genre: "Action" },
+            { title: "Крепкий орешек", genre: "Action" },
+            { title: "Терминатор 2: Судный день", genre: "Action" },
+            { title: "Безумный Макс: Дорога ярости", genre: "Action" },
+            // Adventure
+            { title: "Индиана Джонс: В поисках утраченного ковчега", genre: "Adventure" },
+            { title: "Пираты Карибского моря: Проклятие Черной жемчужины", genre: "Adventure" },
+            { title: "Король Лев", genre: "Adventure" },
+            { title: "Аватар", genre: "Adventure" },
+            { title: "Властелин колец: Братство Кольца", genre: "Adventure" },
+            // Animation
+            { title: "История игрушек", genre: "Animation" },
+            { title: "Шрек", genre: "Animation" },
+            { title: "В поисках Немо", genre: "Animation" },
+            { title: "Холодное сердце", genre: "Animation" },
+            { title: "Зверополис", genre: "Animation" },
+        ];
+
+        function showGames() {
+            document.getElementById('games_menu').style.display = "block";
+            hideThen.push(document.getElementById('games_menu'));
+            oldObjects.forEach(object => {
+                object.style.display = "none";
+                hiddenObjects.push(object);
+            });
+            backButton.style.display = "block";
+        }
+
+        function showBooks() {
+            document.getElementById('books_menu').style.display = "block";
+            hideThen.push(document.getElementById('books_menu'));
+            oldObjects.forEach(object => {
+                object.style.display = "none";
+                hiddenObjects.push(object);
+            });
+            backButton.style.display = "block";
+        }
+
+        function showSerials() {
+            document.getElementById('serials_menu').style.display = "block";
+            hideThen.push(document.getElementById('serials_menu'));
+            oldObjects.forEach(object => {
+                object.style.display = "none";
+                hiddenObjects.push(object);
+            });
+            backButton.style.display = "block";
+        }
+
+        function showMovies() {
+            document.getElementById('movies_menu').style.display = "block";
+            hideThen.push(document.getElementById('movies_menu'));
+            oldObjects.forEach(object => {
+                object.style.display = "none";
+                hiddenObjects.push(object);
+            });
+            backButton.style.display = "block";
+        }
+
+        function showObjects() {
+            hiddenObjects.forEach(object => {
+                object.style.display = "block";
+            });
+            hideThen.forEach(object => {
+                object.style.display = "none";
+            });
+            hiddenObjects = [];
+            hideThen = [];
+            backButton.style.display = "none";
+        }
+
+        function showRandomItem(category) {
+            let items = [];
+            switch (category) {
+                case 'games':
+                    items = games;
+                    break;
+                case 'books':
+                    items = books;
+                    break;
+                case 'serials':
+                    items = serials;
+                    break;
+                case 'movies':
+                    items = movies;
+                    break;
+            }
+
+            const selectedGenre = document.getElementById('selectGenre_' + category).value;
+            const filteredItems = items.filter(item => item.genre === selectedGenre);
+
+            if (filteredItems.length > 0) {
+                const randomIndex = Math.floor(Math.random() * filteredItems.length);
+                const randomItem = filteredItems[randomIndex];
+                const resultSG = document.getElementById("result_show_game_" + category);
+                resultSG.style.display = "block";
+                resultSG.innerHTML = `<b>${randomItem.title}</b>`;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
